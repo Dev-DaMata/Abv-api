@@ -1,4 +1,6 @@
 //using abv-api.Repository;
+using abv_api.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// builder.Services.AddScoped<Colocar o repository aqui de cada rota/>(); //injetando a camada de repositorio
+builder.Services.AddScoped<TypeUsersRepository>(); //injetando a camada de repositorio
 
 var app = builder.Build();
 
