@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "abv-api", "abv-api\abv-api.csproj", "{A7D5BA22-8671-4D76-8C0F-25F81EE27701}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7D5BA22-8671-4D76-8C0F-25F81EE27701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D5BA22-8671-4D76-8C0F-25F81EE27701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D5BA22-8671-4D76-8C0F-25F81EE27701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D5BA22-8671-4D76-8C0F-25F81EE27701}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {403C3ADA-9BBB-49FA-B9DA-53ACD66C6800}
+	EndGlobalSection
+EndGlobal

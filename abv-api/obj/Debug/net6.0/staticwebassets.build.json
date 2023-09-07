@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "9LPQL8qjzQSel6cJLDLcy1ZpgoP1fEeNJKzm2JZK95w=",
+  "Source": "abv-api",
+  "BasePath": "_content/abv-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
