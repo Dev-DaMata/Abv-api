@@ -32,5 +32,19 @@ namespace abv_api.Repository
             return users;
         }
         #endregion
+
+        #region GET ID
+        public async Task<TypeUsers> GetTypeUser(int id_type_user)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_type_user", id_type_user, direction: ParameterDirection.Input);
+            var query = @"SELECT * FROM TypeUser WHERE id_type_user = @id_type_user";
+            var response = await Instance.QueryFirstAsync<TypeUsers>(query, param);//variavel que esta executando a query
+            return response;
+
+        }
+        #endregion
     }
 }

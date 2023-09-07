@@ -49,6 +49,24 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        [HttpGet]
+        [Route("getTypeUser/{id_type_user}")]
+        public async Task<ActionResult<TypeUsers>> GetTypeUser(int id_type_user)
+        {
+            try
+            {
+                var data = await _typeusersRepository.GetTypeUser(id_type_user);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetTypeUser: Erro na requisição dos dados");
+                return new StatusCodeResult(500);
+            }
+
+        }
+
     }
 
 }
