@@ -87,6 +87,25 @@ namespace abv_api.Controllers
 
         }
         #endregion
+
+        #region PUT
+        [HttpPut]
+        [Route("updateTypeUsers")]
+        public async Task<ActionResult<bool>> UpdateTypeUsers(TypeUsers model)
+        {
+            try
+            {
+                var data = await _typeusersRepository.UpdateTypeUsers(model);
+                return data;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Updatetypeusers: Erro na requisição dos dados");
+                return false;
+            }
+
+        }
+        #endregion
     }
 
 }

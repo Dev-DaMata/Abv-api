@@ -69,5 +69,27 @@ namespace abv_api.Repository
             return response > 0;
         }
         #endregion
+
+        #region PUT 
+        public async Task<bool> UpdateTypeUsers(TypeUsers model)
+        {
+            using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+            var param = new DynamicParameters();
+
+            param.Add("id_type_user", model.id_type_user, direction: ParameterDirection.Input);
+            param.Add("type_name", model.type_name, direction: ParameterDirection.Input);
+            param.Add("administrator", model.administrator, direction: ParameterDirection.Input);
+
+            var query = @"UPDATE TypeUser SET             
+                        type_name = @type_name,
+                        administrator = @administrator
+                        WHERE id_type_user = @id_type_user";
+
+            var response = await connection.ExecuteAsync(query, param);
+
+            return response > 0;
+        }
+        #endregion
     }
 }
