@@ -44,5 +44,24 @@ namespace abv_api.Repository
             return response;
         }
         #endregion
+
+        #region POST
+        public async Task<bool> CreateUser(Users model)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_type_user", model.id_type_user, direction: ParameterDirection.Input);
+            param.Add("name", model.name, direction: ParameterDirection.Input);
+            param.Add("password", model.password, direction: ParameterDirection.Input);
+            param.Add("email", model.email, direction: ParameterDirection.Input);
+            param.Add("rg", model.rg, direction: ParameterDirection.Input);
+            param.Add("date_of_birth", model.date_of_birth, direction: ParameterDirection.Input);
+            var query = @"INSERT INTO [User] (id_type_user, name, password, email, rg, date_of_birth)
+                            VALUES (@id_type_user, @name, @password, @email, @rg, @date_of_birth);";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
     }
 }

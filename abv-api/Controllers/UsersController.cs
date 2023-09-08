@@ -52,7 +52,7 @@ namespace abv_api.Controllers
 
         #region GET POR ID
         [HttpGet]
-        [Route("Getuser/{id_user}")]
+        [Route("GetUser/{id_user}")]
         public async Task<ActionResult<TypeUsers>> GetUser(int id_user)
         {
             try
@@ -61,7 +61,24 @@ namespace abv_api.Controllers
                 return Ok(data);
             }catch (Exception ex)
             {
-                _logger.LogError(ex, "GetUser: Erro no requisição dos dados");
+                _logger.LogError(ex, "GetUser: Erro na requisição dos dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
+
+        #region POST
+        [HttpPost]
+        [Route("createUsers")]
+        public async Task<ActionResult<bool>> CreateUser (Users model)
+        {
+            try
+            {
+                var data = await _usersRepository.CreateUser(model);
+                return Ok(data);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, "CreateUser: Erro na requisição dos dados");
                 return new StatusCodeResult(500);
             }
         }
