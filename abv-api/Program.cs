@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<TypeUsersRepository>(); //injetando a camada de repositorio
-
+builder.Services.AddScoped<UsersRepository>(); //injetando a camada de repositorio
 var app = builder.Build();
 
 
