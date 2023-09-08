@@ -46,5 +46,28 @@ namespace abv_api.Repository
 
         }
         #endregion
+
+        #region POST
+        public async Task<bool> CreateTypeUser(string type_name, bool administrator)
+        {
+            using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+            var param = new DynamicParameters();
+
+            
+            param.Add("type_name", type_name, direction: ParameterDirection.Input);
+            param.Add("administrator", administrator, direction: ParameterDirection.Input);
+
+           
+
+            var query = $@"INSERT INTO TypeUser (type_name, administrator)
+                        VALUES
+                        (@type_name, @administrator )";
+
+            var response = await connection.ExecuteAsync(query, param);
+
+            return response > 0;
+        }
+        #endregion
     }
 }

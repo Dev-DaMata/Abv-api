@@ -50,6 +50,7 @@ namespace abv_api.Controllers
         }
         #endregion
 
+        #region GET POR ID
         [HttpGet]
         [Route("getTypeUser/{id_type_user}")]
         public async Task<ActionResult<TypeUsers>> GetTypeUser(int id_type_user)
@@ -66,7 +67,26 @@ namespace abv_api.Controllers
             }
 
         }
+        #endregion
 
+        #region POST
+        [HttpPost]
+        [Route("createTypeUsers")]
+        public async Task<ActionResult<bool>> CreateTypeUser(string type_name, bool administrator)
+        {
+            try
+            {
+                var data = await _typeusersRepository.CreateTypeUser(type_name, administrator);
+                return data;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CreateTypeUser: Erro na requisição dos dados");
+                return false;
+            }
+
+        }
+        #endregion
     }
 
 }
