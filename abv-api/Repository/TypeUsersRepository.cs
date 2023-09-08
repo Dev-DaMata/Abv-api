@@ -91,5 +91,22 @@ namespace abv_api.Repository
             return response > 0;
         }
         #endregion
+
+        #region DELETE
+        public async Task<bool> DeleteTypeUser(int id_type_user)
+        {
+            using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+            var param = new DynamicParameters();
+            param.Add("id_type_user", id_type_user, direction: ParameterDirection.Input);      
+
+            var query = @"DELETE FROM TypeUser
+                        WHERE id_type_user = @id_type_user";
+
+            var response = await connection.ExecuteAsync(query, param);
+
+            return response > 0;
+        }
+        #endregion
     }
 }
