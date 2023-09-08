@@ -50,5 +50,22 @@ namespace abv_api.Controllers
         }
         #endregion
 
+        #region GET POR ID
+        [HttpGet]
+        [Route("Getuser/{id_user}")]
+        public async Task<ActionResult<TypeUsers>> GetUser(int id_user)
+        {
+            try
+            {
+                var data = await _usersRepository.GetUser(id_user);
+                return Ok(data);
+            }catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetUser: Erro no requisição dos dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
+
     }
 }

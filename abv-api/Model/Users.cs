@@ -8,6 +8,6 @@
         public string password { get; set; }
         public string email { get; set; }
         public int rg { get; set; }
-        public DateOnly date_of_birth { get; set; }
+        public DateTime date_of_birth { get; set; }
     }
 }

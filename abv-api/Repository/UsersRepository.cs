@@ -25,10 +25,23 @@ namespace abv_api.Repository
         public async Task<List<Users>> GetUsers()
         {
             var connection = _config.GetConnectionString("DefaultConnection");
-            var Instance = new SqlConnection(connection);
-            var query = "SELECT * FROM [User]";
-            var users = Instance.Query<Users>(query).ToList();
+            var Instance = new SqlConnection(connection); //instanciando a conexão
+            var query = "SELECT * FROM [User]"; //query
+            var users =  Instance.Query<Users>(query).ToList(); //executando a query
             return users;
+        }
+        #endregion
+
+        #region GET POR ID
+        public async Task<Users> GetUser (int id_user)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_user", id_user, direction: ParameterDirection.Input);
+            var query = @"SELECT * FROM [User] WHERE id_user = @id_user";
+            var response = await Instance.QueryFirstAsync<Users>(query, param);//variavel que esta executando a query
+            return response;
         }
         #endregion
     }
