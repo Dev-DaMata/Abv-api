@@ -9,8 +9,8 @@ namespace abv_api.Controllers
     [ApiController] //mapeando o swagger
     [Route("[controller]")]//mapeando o swagger
 
-        public class UsersController : Controller
-        {
+    public class UsersController : Controller
+    {
         #region Injeção de Dependências 
 
         // Configuração da conexão do banco com o microsserviço
@@ -31,5 +31,24 @@ namespace abv_api.Controllers
         }
 
         #endregion
+
+        #region GET
+        [HttpGet]
+        [Route("GetUser")]
+        public async Task<ActionResult> GetUsers()
+        {
+            try
+            {
+                var data = await _usersRepository.GetUsers();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetUsers: Erro na requisição dos dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
+
     }
 }

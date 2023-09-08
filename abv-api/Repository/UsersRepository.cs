@@ -21,5 +21,15 @@ namespace abv_api.Repository
         }
 
         #endregion
+        #region GET 
+        public async Task<List<Users>> GetUsers()
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var query = "SELECT * FROM [User]";
+            var users = Instance.Query<Users>(query).ToList();
+            return users;
+        }
+        #endregion
     }
 }
