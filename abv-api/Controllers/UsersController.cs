@@ -48,6 +48,7 @@ namespace abv_api.Controllers
                 return new StatusCodeResult(500);
             }
         }
+
         #endregion
 
         #region GET POR ID
@@ -84,5 +85,22 @@ namespace abv_api.Controllers
         }
         #endregion
 
+        #region PUT
+        [HttpPut]
+        [Route("updateUser")]
+        public async Task<ActionResult<bool>> UpdateUser (Users model)
+        {
+            try
+            {
+                var data = await _usersRepository.UpdateUser(model);
+                return Ok(data);
+            }
+            catch(Exception ex) 
+            {
+                _logger.LogError(ex, "UpdateUser: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }

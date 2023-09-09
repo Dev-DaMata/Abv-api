@@ -63,5 +63,33 @@ namespace abv_api.Repository
             return response > 0;
         }
         #endregion
+
+        #region PUT
+        public async Task<bool> UpdateUser(Users model)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_user", model.id_user, direction: ParameterDirection.Input);
+            param.Add("id_type_user", model.id_type_user, direction: ParameterDirection.Input);
+            param.Add("name", model.name, direction: ParameterDirection.Input);
+            param.Add("password", model.password, direction: ParameterDirection.Input);
+            param.Add("email", model.email, direction: ParameterDirection.Input);
+            param.Add("rg", model.rg, direction: ParameterDirection.Input);
+            param.Add("date_of_birth", model.date_of_birth, direction: ParameterDirection.Input);
+
+            var query = @"UPDATE [User] SET             
+                        id_type_user = @id_type_user,
+                        name = @name,
+                        password = @password,
+                        email = @email,
+                        rg = @rg,
+                        date_of_birth = @date_of_birth
+                        WHERE id_user = @id_user";
+
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
     }
 }
