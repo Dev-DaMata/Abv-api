@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace abv_api.Repository
 {
@@ -87,6 +88,19 @@ namespace abv_api.Repository
                         date_of_birth = @date_of_birth
                         WHERE id_user = @id_user";
 
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
+
+        #region DELETE  
+        public async Task<bool> DeleteUser (int id_user)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_user", id_user, direction: ParameterDirection.Input);
+            var query = @"DELETE FROM [User] WHERE id_user = @id_user";
             var response = await Instance.ExecuteAsync(query, param);
             return response > 0;
         }

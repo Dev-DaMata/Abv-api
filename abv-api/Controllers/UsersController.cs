@@ -102,5 +102,21 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+        #region DELETE
+        [HttpDelete]
+        [Route("deleteUser")]
+        public async Task<ActionResult<bool>> DeleteUser (int id_user)
+        {
+            try
+            {
+                var data = await _usersRepository.DeleteUser(id_user);
+                return Ok(data);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, "DeleteUser: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
