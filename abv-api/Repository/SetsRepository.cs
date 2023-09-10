@@ -34,5 +34,18 @@ namespace abv_api.Repository
             return response;
         }
         #endregion
+
+        #region GET POR ID
+        public async Task<Sets> GetSet(int id_set)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_set", id_set, direction: ParameterDirection.Input);
+            var query = @"SELECT * FROM [Sets] WHERE id_set = @id_set";
+            var response = await Instance.QueryFirstAsync<Sets>(query, param);
+            return response;
+        }
+        #endregion
     }
 }
