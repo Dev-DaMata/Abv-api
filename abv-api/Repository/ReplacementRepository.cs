@@ -47,5 +47,25 @@ namespace abv_api.Repository
             return response;
         }
         #endregion
+
+        #region POST 
+        public async Task<bool> CreateReplacement(Replacement model)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_team", model.id_team, direction: ParameterDirection.Input);
+            param.Add("id_user_input", model.id_user_input, direction: ParameterDirection.Input);
+            param.Add("id_user_exit", model.id_user_exit, direction: ParameterDirection.Input);
+            param.Add("motivo", model.motivo, direction: ParameterDirection.Input);
+            param.Add("scoreboard_replacement", model.scoreboard_replacement, direction: ParameterDirection.Input);
+            param.Add("set", model.set, direction: ParameterDirection.Input);
+            var query = @"INSERT INTO Replacement (id_team, id_user_input, id_user_exit, motivo, scoreboard_replacement, [set])
+                        VALUES (@id_team, @id_user_input, @id_user_exit, @motivo, @scoreboard_replacement, @set)";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+
+        }
+        #endregion
     }
 }

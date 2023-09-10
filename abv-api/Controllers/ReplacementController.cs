@@ -64,5 +64,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region POST
+        [HttpPost]
+        [Route("CreateReplacement")]
+        public async Task<ActionResult<bool>> CreateReplacement(Replacement model)
+        {
+            try
+            {
+                var data = await _replacementRepository.CreateReplacement(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CreatePost: Erro na requisição de dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
