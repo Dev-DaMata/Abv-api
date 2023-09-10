@@ -82,5 +82,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region PUT
+        [HttpPut]
+        [Route("updateReplacement")]
+        public async Task<ActionResult<bool>> UpdateReplacement(Replacement model)
+        {
+            try
+            {
+                var data = await _replacementRepository.UpdateReplacement(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UpdateUser: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }

@@ -67,5 +67,33 @@ namespace abv_api.Repository
 
         }
         #endregion
+
+        #region PUT
+        public async Task<bool> UpdateReplacement(Replacement model)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_replacement", model.id_replacement, direction: ParameterDirection.Input);
+            param.Add("id_team", model.id_team, direction: ParameterDirection.Input);
+            param.Add("id_user_input", model.id_user_input, direction: ParameterDirection.Input);
+            param.Add("id_user_exit", model.id_user_exit, direction: ParameterDirection.Input);
+            param.Add("motivo", model.motivo, direction: ParameterDirection.Input);
+            param.Add("scoreboard_replacement", model.scoreboard_replacement, direction: ParameterDirection.Input);
+            param.Add("set", model.set, direction: ParameterDirection.Input);
+
+            var query = @"UPDATE Replacement SET             
+                        id_team = @id_team,
+                        id_user_input = @id_user_input,
+                        id_user_exit = @id_user_exit,
+                        motivo = @motivo,
+                        scoreboard_replacement = @scoreboard_replacement,
+                        [set] = @set
+                        WHERE id_replacement = @id_replacement";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+
+        }
+        #endregion
     }
 }
