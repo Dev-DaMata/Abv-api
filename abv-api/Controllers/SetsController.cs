@@ -63,5 +63,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region POST
+        [HttpPost]
+        [Route("CreateSets")]
+        public async Task<ActionResult<bool>> CreateSets(Sets model)
+        {
+            try
+            {
+                var data = await _setsRepository.CreateSets(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CreateSets: Erro na requisição de dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
