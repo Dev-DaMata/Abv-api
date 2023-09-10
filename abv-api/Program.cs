@@ -13,6 +13,7 @@ builder.Services.AddScoped<TypeUsersRepository>(); //injetando a camada de repos
 builder.Services.AddScoped<UsersRepository>(); //injetando a camada de repositorio
 builder.Services.AddScoped<TeamRepository>();
 builder.Services.AddScoped<ReplacementRepository>();
+builder.Services.AddScoped<SetsRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
