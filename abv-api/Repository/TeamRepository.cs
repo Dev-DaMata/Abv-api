@@ -47,5 +47,23 @@ namespace abv_api.Repository
             return response;
         }
         #endregion
+
+        #region POST 
+        public async Task<bool> CreateTeam (Team model)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_user", model.id_user, direction: ParameterDirection.Input);
+            param.Add("sub_cat", model.sub_cat, direction: ParameterDirection.Input);
+            param.Add("gender", model.gender, direction: ParameterDirection.Input);
+            param.Add("name_team", model.name_team, direction: ParameterDirection.Input);
+            var query = @"INSERT INTO Team (id_user, sub_cat, gender, name_team)
+                        VALUES (@id_user, @sub_cat ,@gender , @name_team);";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+
+        }
+        #endregion
     }
 }

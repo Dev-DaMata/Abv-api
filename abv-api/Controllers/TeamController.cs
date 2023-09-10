@@ -65,5 +65,22 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region POST
+        [HttpPost]
+        [Route("CreateTeam")]
+        public async Task<ActionResult<bool>> CreateTeam(Team model)
+        {
+            try
+            {
+                var data = await _teamRepository.CreateTeam(model);
+                return Ok(data);
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex, "CreatePost: Erro na requisição de dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
