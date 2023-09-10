@@ -36,7 +36,7 @@ namespace abv_api.Repository
         #endregion
 
         #region GET POR ID
-        public async Task<Team> GetTeam (int id_team)
+        public async Task<Team> GetTeam(int id_team)
         {
             var connection = _config.GetConnectionString("DefaultConnection");
             var Instance = new SqlConnection(connection);
@@ -49,7 +49,7 @@ namespace abv_api.Repository
         #endregion
 
         #region POST 
-        public async Task<bool> CreateTeam (Team model)
+        public async Task<bool> CreateTeam(Team model)
         {
             var connection = _config.GetConnectionString("DefaultConnection");
             var Instance = new SqlConnection(connection);
@@ -60,6 +60,30 @@ namespace abv_api.Repository
             param.Add("name_team", model.name_team, direction: ParameterDirection.Input);
             var query = @"INSERT INTO Team (id_user, sub_cat, gender, name_team)
                         VALUES (@id_user, @sub_cat ,@gender , @name_team);";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+
+        }
+        #endregion
+
+        #region PUT
+        public async Task<bool> UpdateTeam(Team model)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_team", model.id_team, direction: ParameterDirection.Input);
+            param.Add("id_user", model.id_user, direction: ParameterDirection.Input);
+            param.Add("sub_cat", model.sub_cat, direction: ParameterDirection.Input);
+            param.Add("gender", model.gender, direction: ParameterDirection.Input);
+            param.Add("name_team", model.name_team, direction: ParameterDirection.Input);
+
+            var query = @"UPDATE [Team] SET             
+                        id_user = @id_user,
+                        sub_cat = @sub_cat,
+                        gender = @gender,
+                        name_team = @name_team
+                        WHERE id_team = @id_team";
             var response = await Instance.ExecuteAsync(query, param);
             return response > 0;
 

@@ -82,5 +82,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region PUT
+        [HttpPut]
+        [Route("updateTeam")]
+        public async Task<ActionResult<bool>> UpdateTeam(Team model)
+        {
+            try
+            {
+                var data = await _teamRepository.UpdateTeam(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UpdateUser: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
