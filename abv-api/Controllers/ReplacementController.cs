@@ -46,5 +46,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region GET POR ID  
+        [HttpGet]
+        [Route("GetReplacement/{id_replacement}")]
+        public async Task<ActionResult> GetReplacement(int id_replacement)
+        {
+            try
+            {
+                var data = await _replacementRepository.GetReplacement(id_replacement);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetReplacement: Erro na requisição dos dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }

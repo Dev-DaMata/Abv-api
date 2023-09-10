@@ -34,5 +34,18 @@ namespace abv_api.Repository
             return response;
         }
         #endregion
+
+        #region GET POR ID
+        public async Task<Replacement> GetReplacement(int id_replacement)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_replacement", id_replacement, direction: ParameterDirection.Input);
+            var query = @"SELECT * FROM Replacement WHERE id_replacement = @id_replacement";
+            var response = await Instance.QueryFirstAsync<Replacement>(query, param);
+            return response;
+        }
+        #endregion
     }
 }
