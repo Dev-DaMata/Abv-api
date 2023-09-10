@@ -95,5 +95,18 @@ namespace abv_api.Repository
 
         }
         #endregion
+
+        #region DELETE  
+        public async Task<bool> DeleteReplacement(int id_replacement)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_replacement", id_replacement, direction: ParameterDirection.Input);
+            var query = @"DELETE FROM Replacement WHERE id_replacement = @id_replacement;";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
     }
 }
