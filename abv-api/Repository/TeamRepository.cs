@@ -89,5 +89,19 @@ namespace abv_api.Repository
 
         }
         #endregion
+        
+        #region DELETE  
+        public async Task<bool> DeleteTeam(int id_team)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_team", id_team, direction: ParameterDirection.Input);
+            var query = @"DELETE FROM Team WHERE id_team = @id_team;";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
+        
     }
 }

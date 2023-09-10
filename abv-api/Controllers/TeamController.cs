@@ -100,5 +100,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region DELETE
+        [HttpDelete]
+        [Route("deleteTeam")]
+        public async Task<ActionResult<bool>> DeleteTeam(int id_team)
+        {
+            try
+            {
+                var data = await _teamRepository.DeleteTeam(id_team);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UpdateUser: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
