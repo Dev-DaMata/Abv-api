@@ -3,7 +3,6 @@ using abv_api.Model;
 using abv_api.Repository;
 using System.Reflection;
 
-
 namespace abv_api.Controllers
 {
     [ApiController] //mapeando o swagger
@@ -102,6 +101,7 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
         #region DELETE
         [HttpDelete]
         [Route("deleteUser")]

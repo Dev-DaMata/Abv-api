@@ -22,6 +22,7 @@ namespace abv_api.Repository
         }
 
         #endregion
+
         #region GET 
         public async Task<List<Users>> GetUsers()
         {

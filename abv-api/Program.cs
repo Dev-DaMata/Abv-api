@@ -11,8 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<TypeUsersRepository>(); //injetando a camada de repositorio
 builder.Services.AddScoped<UsersRepository>(); //injetando a camada de repositorio
+builder.Services.AddScoped<TeamRepository>();
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
