@@ -99,5 +99,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region DELETE
+        [HttpDelete]
+        [Route("deleteSets")]
+        public async Task<ActionResult<bool>> DeleteSets(int id_set)
+        {
+            try
+            {
+                var data = await _setsRepository.DeleteSets(id_set);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UpdateSets: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }

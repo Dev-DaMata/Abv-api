@@ -105,6 +105,19 @@ namespace abv_api.Repository
 
         }
         #endregion
+
+        #region DELETE  
+        public async Task<bool> DeleteSets(int id_set)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_set", id_set, direction: ParameterDirection.Input);
+            var query = @"DELETE FROM [Sets] WHERE id_set = @id_set;";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
     }
 
 }
