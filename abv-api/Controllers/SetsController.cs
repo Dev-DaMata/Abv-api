@@ -81,5 +81,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region PUT
+        [HttpPut]
+        [Route("updateSets")]
+        public async Task<ActionResult<bool>> UpdateSets(Sets model)
+        {
+            try
+            {
+                var data = await _setsRepository.UpdateSets(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UpdateSets: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
