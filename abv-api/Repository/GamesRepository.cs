@@ -32,5 +32,18 @@ namespace abv_api.Repository
             return response;
         }
         #endregion
+
+        #region GET POR ID
+        public async Task<Games> GetGame(int id_game)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_game", id_game, direction: ParameterDirection.Input);
+            var query = @"SELECT * FROM Games WHERE id_game = @id_game";
+            var response = await Instance.QueryFirstAsync<Games>(query, param);
+            return response;
+        }
+        #endregion
     }
 }
