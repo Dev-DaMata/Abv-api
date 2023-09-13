@@ -14,6 +14,7 @@ builder.Services.AddScoped<UsersRepository>(); //injetando a camada de repositor
 builder.Services.AddScoped<TeamRepository>();
 builder.Services.AddScoped<ReplacementRepository>();
 builder.Services.AddScoped<SetsRepository>();
+builder.Services.AddScoped<GamesRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
