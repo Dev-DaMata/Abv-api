@@ -95,5 +95,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region DELETE
+        [HttpDelete]
+        [Route("DeleteGame")]
+        public async Task<ActionResult<bool>> DeleteGame(int id_game)
+        {
+            try
+            {
+                var data = await _gamesRepository.DeleteGame(id_game);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "DeleteGame: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }

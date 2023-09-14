@@ -99,5 +99,18 @@ namespace abv_api.Repository
             return response > 0;
         }
         #endregion
+
+        #region DELETE
+        public async Task<bool> DeleteGame (int id_game)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_game", id_game, direction: ParameterDirection.Input);
+            var query = @"DELETE FROM Games WHERE id_game = @id_game";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
     }
 }
