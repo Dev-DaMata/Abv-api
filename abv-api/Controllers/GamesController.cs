@@ -77,5 +77,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region PUT
+        [HttpPut]
+        [Route("UpdateGame")]
+        public async Task<ActionResult<bool>> UpdateGame(Games model)
+        {
+            try
+            {
+                var data = await _gamesRepository.UpdateGame(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UpdateGame: erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
