@@ -59,5 +59,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region POST
+        [HttpPost]
+        [Route("CreateGame")]
+        public async Task<ActionResult<bool>> CreateGames(Games model)
+        {
+            try
+            {
+                var data = await _gamesRepository.CreateGames(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CreateGames: Erro na reuisição dos dados");
+               return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
