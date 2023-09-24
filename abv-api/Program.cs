@@ -1,4 +1,5 @@
 //using abv-api.Repository;
+using abv_api.Model;
 using abv_api.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddScoped<TeamRepository>();
 builder.Services.AddScoped<ReplacementRepository>();
 builder.Services.AddScoped<SetsRepository>();
 builder.Services.AddScoped<GamesRepository>();
+builder.Services.AddScoped<ClassificationRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
