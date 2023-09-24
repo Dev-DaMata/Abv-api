@@ -58,5 +58,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region POST
+        [HttpPost]
+        [Route("CreateClassification")]
+        public async Task<ActionResult<bool>> CreateClassification(Classification model)
+        {
+            try
+            {
+                var data = await _classificationRepository.CreateClassification(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CreateGames: Erro na reuisição dos dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
