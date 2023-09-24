@@ -70,5 +70,43 @@ namespace abv_api.Repository
             return response > 0;
         }
         #endregion
+
+        #region PUT
+        public async Task<bool> UpdateClassification(Classification model)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_classification", model.id_classification, direction: ParameterDirection.Input);
+            param.Add("id_game", model.id_game, direction: ParameterDirection.Input);
+            param.Add("name", model.name, direction: ParameterDirection.Input);
+            param.Add("classif", model.classif, direction: ParameterDirection.Input);
+            param.Add("pts", model.pts, direction: ParameterDirection.Input);
+            param.Add("win", model.win, direction: ParameterDirection.Input);
+            param.Add("loss", model.loss, direction: ParameterDirection.Input);
+            param.Add("sp", model.sp, direction: ParameterDirection.Input);
+            param.Add("sc", model.sc, direction: ParameterDirection.Input);
+            param.Add("ss", model.ss, direction: ParameterDirection.Input);
+            param.Add("pp", model.pp, direction: ParameterDirection.Input);
+            param.Add("pc", model.pc, direction: ParameterDirection.Input);
+            param.Add("points_balance", model.points_balance, direction: ParameterDirection.Input);
+            var query = @"UPDATE [Classification] SET
+                         id_game = @id_game,
+                         [name] = @name,
+                         classif = @classif,
+                         pts = @pts,
+                         win = @win,
+                         loss = @loss,
+                         sp = @sp,
+                         sc = @sc,
+                         ss = @ss,
+                         pp = @pp,
+                         pc = @pc,
+                         points_balance = @points_balance
+                         WHERE id_classification = @id_classification";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
     }
 }

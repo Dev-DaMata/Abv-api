@@ -76,5 +76,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region PUT
+        [HttpPut]
+        [Route("UpdateClassification")]
+        public async Task<ActionResult<bool>> UpdateClassification(Classification model)
+        {
+            try
+            {
+                var data = await _classificationRepository.UpdateClassification(model);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "UpdateClassification: erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
