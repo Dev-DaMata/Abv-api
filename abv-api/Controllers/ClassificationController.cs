@@ -41,5 +41,22 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region GET POR ID
+        [HttpGet]
+        [Route("GetClassification/{id_classification}")]
+        public async Task<ActionResult> GetClassification(int id_classification)
+        {
+            try
+            {
+                var data = await _classificationRepository.GetClassification(id_classification);
+                return Ok(data);
+            }catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetClassification: Erro na requisição de dados");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }

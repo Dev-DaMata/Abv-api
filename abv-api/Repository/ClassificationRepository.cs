@@ -32,5 +32,18 @@ namespace abv_api.Repository
             return response;
         }
         #endregion
+
+        #region GET POR ID 
+        public async Task<Classification> GetClassification(int id_classification)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_classification", id_classification, direction: ParameterDirection.Input);
+            var query = @"SELECT * FROM [Classification] WHERE id_classification = @id_classification";
+            var response = await Instance.QueryFirstAsync<Classification>(query, param);
+            return response;
+        }
+        #endregion
     }
 }
