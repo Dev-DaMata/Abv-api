@@ -108,5 +108,18 @@ namespace abv_api.Repository
             return response > 0;
         }
         #endregion
+
+        #region DELETE
+        public async Task<bool> DeleteClassification(int id_classification)
+        {
+            var connection = _config.GetConnectionString("DefaultConnection");
+            var Instance = new SqlConnection(connection);
+            var param = new DynamicParameters();
+            param.Add("id_classification", id_classification, direction: ParameterDirection.Input);
+            var query = @"DELETE FROM [Classification] WHERE id_classification = @id_classification";
+            var response = await Instance.ExecuteAsync(query, param);
+            return response > 0;
+        }
+        #endregion
     }
 }

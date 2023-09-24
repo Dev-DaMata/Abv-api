@@ -94,5 +94,23 @@ namespace abv_api.Controllers
             }
         }
         #endregion
+
+        #region DELETE
+        [HttpDelete]
+        [Route("DeleteClassification")]
+        public async Task<ActionResult<bool>> DeleteClassification(int id_classification)
+        {
+            try
+            {
+                var data = await _classificationRepository.DeleteClassification(id_classification);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "DeleteClassification: Erro na requisição");
+                return new StatusCodeResult(500);
+            }
+        }
+        #endregion
     }
 }
